@@ -2,15 +2,24 @@
 #define IRULAN_APP_H
 
 #include "irulan/math/Vector2.h"
+#include "irulan/graph/Renderer.h"
+#include "BufferAllocator.h"
 #include "SDL2/SDL.h"
 #include <string>
 
 namespace iru {
     class App {
     public:
-        App(Vector2i size, const std::string& title);
+        int construct(Vector2i size, const std::string& title);
+
+    protected:
+        Renderer& renderer() { return rndr; };
+        Buffer* newBuffer(unsigned int size);
+        void close() { done = true; };
 
     private:
+        Renderer rndr;
+        BufferAllocator allc;
         std::string title;
         Vector2i size;
         bool done = false;
@@ -18,9 +27,7 @@ namespace iru {
         SDL_GLContext context;
 
         void constructWindow();
-
-        void loop();
-        void close(){done = true;};
+        int loop();
         virtual bool init() = 0;
         virtual bool logic(float delta) = 0;
         virtual bool render(float delta) = 0;

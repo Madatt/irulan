@@ -7,14 +7,22 @@ set(HEADERS
         inc/irulan/math/Matrix4.h
         inc/irulan/math/Vector2.h
         inc/irulan/system/App.h
-        inc/irulan/system/opengl/oglPointer.h
-        inc/irulan/system/opengl/oglPointer.tpp
+        inc/irulan/system/opengl/Pointer.h
+        inc/irulan/system/opengl/Pointer.tpp
         )
 
 set(SOURCES
         src/irulan/system/App.cpp
+        src/irulan/system/opengl/Traits.cpp
+        src/irulan/system/BufferAllocator.cpp
+        src/irulan/system/Buffer.cpp
         src/irulan/math/Matrix4.cpp
+        src/irulan/graph/Renderer.cpp
+        src/irulan/graph/RenderTarget.cpp
+        src/irulan/graph/Descriptor.cpp
+        src/glad/glad.c
         )
 
 
 add_library(irulan ${SOURCES} ${HEADERS})
+add_subdirectory(test)

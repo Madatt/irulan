@@ -1,10 +1,22 @@
+#include <iostream>
 #include "irulan/system/App.h"
+#include "glad/glad.h"
 
 namespace iru {
-    App::App(Vector2i size, const std::string& title) {
+    int App::construct(Vector2i size, const std::string& title) {
+        this->size = size;
         SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS);
         constructWindow();
-        loop();
+        if (!gladLoadGL()) {
+            std::cout << "glad loading error" << std::endl;
+            close();
+            return 0;
+        }
+
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glViewport(0, 0, size.x, size.y);
+        return loop();
     }
 
     void App::constructWindow() {
@@ -20,10 +32,15 @@ namespace iru {
         }
     }
 
-    void App::loop() {
-        void init();
-        while (!done) {
+    Buffer* App::newBuffer(unsigned int size) {
+        return allc.alloc(size);
+    }
+
+    int App::loop() {
+        init();
+        //while (!done) {
             //stub;
-        }
+        //}
+        return 0;
     }
 }
