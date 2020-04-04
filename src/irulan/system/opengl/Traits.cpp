@@ -33,13 +33,13 @@ namespace iru::ogl {
             glDeleteVertexArrays(1, &id);
     }
 
-    unsigned int Buffer::alloc() {
+    unsigned int VertexBuffer::alloc() {
         unsigned int tmp;
         glCreateBuffers(1, &tmp);
         return tmp;
     }
 
-    void Buffer::free(unsigned int id) {
+    void VertexBuffer::free(unsigned int id) {
         if(id)
             glDeleteBuffers(1, &id);
     }

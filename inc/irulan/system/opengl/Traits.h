@@ -20,7 +20,7 @@ namespace iru::ogl {
         static void free(unsigned int id);
     };
 
-    class Buffer {
+    class VertexBuffer {
     public:
         static unsigned int alloc();
         static void free(unsigned int id);

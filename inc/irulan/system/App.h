@@ -23,6 +23,7 @@ namespace iru {
         std::string title;
         Vector2i size;
         bool done = false;
+        float ticks, accu;
         SDL_Window* window;
         SDL_GLContext context;
 

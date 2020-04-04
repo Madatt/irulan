@@ -38,9 +38,27 @@ namespace iru {
 
     int App::loop() {
         init();
-        //while (!done) {
-            //stub;
-        //}
+
+        while (!done) {
+            float ela = SDL_GetTicks() - ticks;
+            ticks = SDL_GetTicks();
+            accu += ela;
+
+            SDL_Event event;
+            while (SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT)
+                    close();
+
+            }
+
+            while (accu >= 1000.f / 60.f) {
+                logic(1.f / 60.f);
+                accu -= 1000.f / 60.f;
+            }
+            glEnable(GL_DEPTH_TEST);
+            render(1000.f / ela);
+        }
+
         return 0;
     }
 }

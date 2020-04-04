@@ -6,6 +6,7 @@
 namespace iru {
     class Buffer {
         friend class BufferAllocator;
+        friend class Descriptor;
 
     public:
         ~Buffer();
