@@ -10,6 +10,7 @@ class TestApp : public iru::App {
 
     iru::Buffer* buff1;
     iru::Descriptor* desc1;
+    iru::Shader* shad1;
 };
 
 

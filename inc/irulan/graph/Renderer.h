@@ -3,6 +3,7 @@
 
 #include "RenderTarget.h"
 #include "Descriptor.h"
+#include "Shader.h"
 #include <cstddef>
 
 namespace iru {
@@ -12,12 +13,14 @@ namespace iru {
         struct RendererState {
             RenderTarget* target = nullptr;
             Descriptor* descriptor = nullptr;
+            Shader* shader = nullptr;
         };
     public:
-        void render(int first, int count);
+        void draw(int first, int count);
 
         void setDescriptor(Descriptor* descriptor);
         void setRenderTarget(RenderTarget* target);
+        void setShader(Shader* shader);
 
     private:
         Renderer();
@@ -25,6 +28,7 @@ namespace iru {
 
         void bindDescriptor();
         void bindTarget();
+        void bindShader();
 
         RendererState nextState;
         RendererState lastState;

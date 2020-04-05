@@ -6,8 +6,9 @@ namespace iru {
 
     }
 
-    void Renderer::render(int first, int count) {
+    void Renderer::draw(int first, int count) {
         bindDescriptor();
+        bindShader();
         glDrawArrays(GL_TRIANGLES, first, count);
     }
 
@@ -17,6 +18,19 @@ namespace iru {
 
     void Renderer::setRenderTarget(RenderTarget* target) {
         nextState.target = target;
+    }
+
+    void Renderer::setShader(Shader* shader) {
+        nextState.shader = shader;
+    }
+
+    void Renderer::bindShader() {
+        if (nextState.shader != nullptr) {
+            if (nextState.shader != lastState.shader) {
+                glUseProgram(nextState.shader->ptr.get());
+                lastState.shader = nextState.shader;
+            }
+        }
     }
 
     void Renderer::bindDescriptor() {

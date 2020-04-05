@@ -20,6 +20,7 @@ set(SOURCES
         src/irulan/graph/Renderer.cpp
         src/irulan/graph/RenderTarget.cpp
         src/irulan/graph/Descriptor.cpp
+        src/irulan/graph/Shader.cpp
         src/glad/glad.c
         )
 

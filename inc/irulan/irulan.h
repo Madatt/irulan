@@ -6,3 +6,4 @@
 #include "irulan/math/Vector2.h"
 #include "irulan/math/Matrix4.h"
 #include "irulan/graph/Descriptor.h"
+#include "irulan/graph/Shader.h"

@@ -1,6 +1,8 @@
 #ifndef IRULAN_MATRIX4_H
 #define IRULAN_MATRIX4_H
 
+#include <initializer_list>
+
 namespace iru {
     class Matrix4 {
     public:
