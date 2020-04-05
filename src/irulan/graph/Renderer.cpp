@@ -7,6 +7,7 @@ namespace iru {
     }
 
     void Renderer::draw(int first, int count) {
+        bindTextures();
         bindDescriptor();
         bindShader();
         glDrawArrays(GL_TRIANGLES, first, count);
@@ -22,6 +23,20 @@ namespace iru {
 
     void Renderer::setShader(Shader* shader) {
         nextState.shader = shader;
+    }
+
+    void Renderer::setTexture(Texture* texture, int unit) {
+        nextState.textures[unit] = texture;
+    }
+
+    void Renderer::bindTextures() {
+        for(int i = 0; i < 16; i++) {
+            if (nextState.textures[i] != nullptr) {
+                if (nextState.textures[i] != lastState.textures[i]) {
+                    glBindTextureUnit(i, nextState.textures[i]->ptr.get());
+                }
+            }
+        }
     }
 
     void Renderer::bindShader() {

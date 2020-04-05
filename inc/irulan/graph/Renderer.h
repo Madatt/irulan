@@ -4,7 +4,9 @@
 #include "RenderTarget.h"
 #include "Descriptor.h"
 #include "Shader.h"
+#include "Texture.h"
 #include <cstddef>
+#include <array>
 
 namespace iru {
     class Renderer {
@@ -14,6 +16,7 @@ namespace iru {
             RenderTarget* target = nullptr;
             Descriptor* descriptor = nullptr;
             Shader* shader = nullptr;
+            std::array<Texture*, 16> textures = {};
         };
     public:
         void draw(int first, int count);
@@ -21,6 +24,7 @@ namespace iru {
         void setDescriptor(Descriptor* descriptor);
         void setRenderTarget(RenderTarget* target);
         void setShader(Shader* shader);
+        void setTexture(Texture* texture, int unit);
 
     private:
         Renderer();
@@ -29,6 +33,7 @@ namespace iru {
         void bindDescriptor();
         void bindTarget();
         void bindShader();
+        void bindTextures();
 
         RendererState nextState;
         RendererState lastState;

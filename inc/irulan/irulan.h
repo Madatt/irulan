@@ -7,3 +7,4 @@
 #include "irulan/math/Matrix4.h"
 #include "irulan/graph/Descriptor.h"
 #include "irulan/graph/Shader.h"
+#include "irulan/graph/Texture.h"
