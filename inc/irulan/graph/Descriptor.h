@@ -12,7 +12,8 @@ namespace iru {
 
         void attachBuffer(Buffer* buffer, unsigned int i, unsigned int start , unsigned int stride);
         void attachIBuffer(Buffer* buffer);
-        void setAttrib(unsigned int vi , unsigned int i, unsigned int count, unsigned int offset);
+        void setAttribute(unsigned int i, unsigned int count, unsigned int offset);
+        void setAttributeBuffer(unsigned int i, unsigned int vi);
     private:
         ogl::Pointer<ogl::VertexArray> ptr;
         unsigned int offset = 0;

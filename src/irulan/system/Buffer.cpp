@@ -3,7 +3,7 @@
 
 namespace iru {
     Buffer::~Buffer() {
-        block->ba->free(this);
+        block->ba->free(block);
     }
 
     void Buffer::setData(unsigned int size, unsigned int off, void* data) {

@@ -9,16 +9,14 @@ namespace iru {
         friend class Descriptor;
 
     public:
-        ~Buffer();
-
         void setData(unsigned int size, unsigned int off, void* data);
         unsigned int getOffset() const { return block->offset; };
         unsigned int getSize() const { return block->size; };
     private:
         BufferBlock* block;
-
         Buffer() = delete;
-        Buffer(BufferBlock* t_bb);
+        ~Buffer();
+        Buffer(BufferBlock* block);
 
     };
 }

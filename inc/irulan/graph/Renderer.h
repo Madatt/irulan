@@ -3,6 +3,7 @@
 
 #include "RenderTarget.h"
 #include "Descriptor.h"
+#include <cstddef>
 
 namespace iru {
     class Renderer {
@@ -13,11 +14,14 @@ namespace iru {
             Descriptor* descriptor = nullptr;
         };
     public:
-        void setDescriptor(Descriptor& descriptor);
-        void setRenderTarget(RenderTarget& target);
+        void render(int first, int count);
+
+        void setDescriptor(Descriptor* descriptor);
+        void setRenderTarget(RenderTarget* target);
 
     private:
         Renderer();
+        void* operator new(std::size_t sz) = delete;
 
         void bindDescriptor();
         void bindTarget();

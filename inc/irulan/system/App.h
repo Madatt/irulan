@@ -14,8 +14,9 @@ namespace iru {
 
     protected:
         Renderer& renderer() { return rndr; };
-        Buffer* newBuffer(unsigned int size);
+        BufferAllocator& defaultAllocator() { return allc; };
         void close() { done = true; };
+        void flip();
 
     private:
         Renderer rndr;

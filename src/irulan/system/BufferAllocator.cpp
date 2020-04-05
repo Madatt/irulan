@@ -11,11 +11,10 @@ namespace iru {
 
     }
 
-    Buffer* BufferAllocator::alloc(unsigned int size) {
+    BufferBlock* BufferAllocator::alloc(unsigned int size) {
         for (auto curr = head; curr != nullptr; curr = curr->next) {
             if (curr->size >= size and curr->free) {
                 unsigned int ns = curr->size - size;
-                auto bf = new Buffer(curr);
                 curr->free = false;
                 curr->size = size;
 
@@ -32,7 +31,7 @@ namespace iru {
                     curr->next = nb;
                 }
 
-                return bf;
+                return curr;
             }
         }
 
@@ -40,9 +39,14 @@ namespace iru {
         return alloc(size);
     }
 
-    void BufferAllocator::free(Buffer* buffer) {
-        if (buffer->block->ba == this)
-            buffer->block->free = true;
+    void BufferAllocator::free(BufferBlock* buffer) {
+        if (buffer->ba == this)
+            buffer->free = true;
+    }
+
+    Buffer* BufferAllocator::newBuffer(unsigned int size) {
+        auto block = alloc(size);
+        return new Buffer(block);
     }
 
     void BufferAllocator::newBlock(unsigned int size) {

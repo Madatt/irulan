@@ -7,10 +7,12 @@ namespace iru {
             : ptr() {
     }
 
-    void Descriptor::setAttrib(unsigned int vi, unsigned int i, unsigned int count, unsigned int off) {
-        glBindVertexArray(ptr.get());
+    void Descriptor::setAttribute(unsigned int i, unsigned int count, unsigned int off) {
         glEnableVertexArrayAttrib(ptr.get(), i);
         glVertexArrayAttribFormat(ptr.get(), i, count, GL_FLOAT, GL_FALSE, off);
+    }
+
+    void Descriptor::setAttributeBuffer(unsigned int i, unsigned int vi) {
         glVertexArrayAttribBinding(ptr.get(), i, vi);
     }
 

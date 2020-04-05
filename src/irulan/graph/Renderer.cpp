@@ -6,12 +6,17 @@ namespace iru {
 
     }
 
-    void Renderer::setDescriptor(Descriptor& descriptor) {
-        nextState.descriptor = &descriptor;
+    void Renderer::render(int first, int count) {
+        bindDescriptor();
+        glDrawArrays(GL_TRIANGLES, first, count);
     }
 
-    void Renderer::setRenderTarget(RenderTarget& target) {
-        nextState.target = &target;
+    void Renderer::setDescriptor(Descriptor* descriptor) {
+        nextState.descriptor = descriptor;
+    }
+
+    void Renderer::setRenderTarget(RenderTarget* target) {
+        nextState.target = target;
     }
 
     void Renderer::bindDescriptor() {
@@ -22,6 +27,7 @@ namespace iru {
             }
         }
     }
+
 
     void Renderer::bindTarget() {
         if (nextState.target != lastState.target) {

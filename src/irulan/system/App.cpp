@@ -32,10 +32,6 @@ namespace iru {
         }
     }
 
-    Buffer* App::newBuffer(unsigned int size) {
-        return allc.alloc(size);
-    }
-
     int App::loop() {
         init();
 
@@ -55,10 +51,14 @@ namespace iru {
                 logic(1.f / 60.f);
                 accu -= 1000.f / 60.f;
             }
-            glEnable(GL_DEPTH_TEST);
+
             render(1000.f / ela);
         }
 
         return 0;
+    }
+
+    void App::flip() {
+        SDL_GL_SwapWindow(window);
     }
 }

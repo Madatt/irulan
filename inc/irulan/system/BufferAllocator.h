@@ -25,15 +25,18 @@ namespace iru {
     };
 
     class BufferAllocator {
+        friend class Buffer;
     public:
         BufferAllocator();
         ~BufferAllocator();
 
-        Buffer* alloc(unsigned int size);
-        void free(Buffer* buffer);
+        Buffer* newBuffer(unsigned int size);
 
     private:
         BufferBlock* head = nullptr;
+
+        BufferBlock* alloc(unsigned int size);
+        void free(BufferBlock* buffer);
         void newBlock(unsigned int size);
     };
 }
