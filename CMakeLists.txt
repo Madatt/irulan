@@ -17,6 +17,7 @@ set(SOURCES
         src/irulan/system/BufferAllocator.cpp
         src/irulan/system/Buffer.cpp
         src/irulan/math/Matrix4.cpp
+        src/irulan/math/Quaternion.cpp
         src/irulan/graph/Renderer.cpp
         src/irulan/graph/RenderTarget.cpp
         src/irulan/graph/Descriptor.cpp
