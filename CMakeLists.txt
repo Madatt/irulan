@@ -6,6 +6,7 @@ include_directories(inc)
 set(HEADERS
         inc/irulan/math/Matrix4.h
         inc/irulan/math/Vector2.h
+        inc/irulan/data/Vertex.h
         inc/irulan/system/App.h
         inc/irulan/system/opengl/Pointer.h
         inc/irulan/system/opengl/Pointer.tpp
@@ -18,6 +19,7 @@ set(SOURCES
         src/irulan/system/Buffer.cpp
         src/irulan/math/Matrix4.cpp
         src/irulan/math/Quaternion.cpp
+        src/irulan/data/Mesh.cpp
         src/irulan/graph/Renderer.cpp
         src/irulan/graph/RenderTarget.cpp
         src/irulan/graph/Descriptor.cpp

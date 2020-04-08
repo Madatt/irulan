@@ -12,6 +12,8 @@ class TestApp : public iru::App {
     iru::Descriptor* desc1;
     iru::Shader* shad1;
     iru::Texture* tex1;
+    iru::Mesh mesh1;
+    iru::Matrix4 cam, per, res;
 };
 
 

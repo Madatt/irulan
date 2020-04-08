@@ -21,7 +21,8 @@ namespace iru {
     }
 
     Matrix4& Matrix4::operator=(const Matrix4& mat) {
-        std::copy(mat.data, mat.data + 16, data);
+        for (int i = 0; i < 16; i++)
+            data[i] = mat.data[i];
         return *this;
     }
 
@@ -49,11 +50,11 @@ namespace iru {
 
     Matrix4 Matrix4::operator*(const Matrix4& mat) const {
         Matrix4 nw;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                nw.data[i * 4 + j] = 0.0;
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                nw.data[x * 4 + y] = 0.0;
                 for (int k = 0; k < 4; k++) {
-                    nw.data[i * 4 + j] += data[j + k * 4] * data[k + j * 4];
+                    nw.data[x * 4 + y] += data[y + k * 4] * mat.data[k + x * 4];
                 }
             }
         }
@@ -143,8 +144,8 @@ namespace iru {
         float z = ax.z;
 
         float a = M_PI / 180.f * angle;
-        float c = cos(a);
-        float s = sin(a);
+        float c = std::cos(a);
+        float s = std::sin(a);
         float cc = (1.f - c);
 
         Matrix4 mat = getIdentity();

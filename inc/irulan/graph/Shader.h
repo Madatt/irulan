@@ -9,6 +9,7 @@ namespace iru {
     class Shader {
         friend class Renderer;
     public:
+        Shader(){};
         Shader(const std::string& ver, const std::string& frag);
 
         void setMatrix4(const std::string& name, Matrix4 mat) const;
@@ -16,14 +17,14 @@ namespace iru {
 
         bool check();
 
+        void setVertex(const std::string& ver);
+        void setFragment(const std::string& frag);
+        void link();
+
     private:
         ogl::Pointer<ogl::Shader> ptr;
         unsigned int vId = 0;
         unsigned int fId = 0;
-
-        void setVertex(const std::string& ver);
-        void setFragment(const std::string& frag);
-        void link();
     };
 }
 
