@@ -45,9 +45,9 @@ namespace iru {
                     buff >> f;
                     auto vec = splitFace(f);
                     vertices.emplace_back(
-                            pos[std::stoi(vec[0])],
-                            posTex[std::stoi(vec[1])],
-                            norm[std::stoi(vec[2])]
+                            pos[std::stoi(vec[0]) - 1],
+                            posTex[std::stoi(vec[1]) - 1],
+                            norm[std::stoi(vec[2]) - 1]
                     );
                 }
             }

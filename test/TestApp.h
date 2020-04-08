@@ -14,6 +14,7 @@ class TestApp : public iru::App {
     iru::Texture* tex1;
     iru::Mesh mesh1;
     iru::Matrix4 cam, per, res;
+    float an = 0.f;
 };
 
 

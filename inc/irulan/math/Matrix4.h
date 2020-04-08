@@ -19,12 +19,11 @@ namespace iru {
         Matrix4 operator+(const Matrix4& mat) const;
         Matrix4 operator-(const Matrix4& mat) const;
         Matrix4 operator*(const Matrix4& mat) const;
+        Vector3f operator*(const Vector3f& vec) const;
         Matrix4& operator+=(const Matrix4& mat);
         Matrix4& operator-=(const Matrix4& mat);
         Matrix4& operator*=(const Matrix4& mat);
 
-
-        Vector3f apply(const Vector3f& vec) const;
         static Matrix4 getIdentity();
         static Matrix4 createPerspective(float fov, float asp, float n, float f);
         static Matrix4 createOrtho(int w, int h, float t_n, float f);

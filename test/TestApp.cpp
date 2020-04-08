@@ -1,7 +1,8 @@
+#include <irulan/math/Quaternion.h>
 #include "TestApp.h"
 
 bool TestApp::init() {
-    buff1 = defaultAllocator().newBuffer(123);
+    buff1 = defaultAllocator().newBuffer(999);
     desc1 = new iru::Descriptor();
 
     float vers1[] = {
@@ -50,16 +51,18 @@ bool TestApp::init() {
                         "    FragColor = vec4(1, 1, 1, 1) * texture(u_Tex, o_Tex);\n"
                         "} ";
 
+    mesh1.loadObj("test2.obj");
+
 
     per = iru::Matrix4::createPerspective(45.f, 800.f/600.f, 0.1f, 100.0f);
-    cam = iru::Matrix4::createLookAt(iru::Vector3(0.f, 5.f, 10.f), iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
+    cam = iru::Matrix4::createLookAt(iru::Vector3(10.f, 5.f, 10.f), iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
     res = per * cam;
 
     shad1 = new iru::Shader(vers, frags);
     shad1->setInt("u_Tex", 0);
     shad1->setMatrix4("u_Mat", res);
 
-    buff1->setData(sizeof(iru::Vertex) * 3, 0, vers2);
+    buff1->setData(0, mesh1.vertices);
     desc1->attachBuffer(buff1, 0, 0, sizeof(iru::Vertex));
     desc1->setAttribute(0, 3, 0);
     desc1->setAttribute(1, 2, sizeof(iru::Vector3f));
@@ -69,22 +72,30 @@ bool TestApp::init() {
     tex1 = new iru::Texture();
     tex1->loadPng("rafonix.png");
 
-    mesh1.loadObj("test.obj");
+
 
     return true;
 }
 
 bool TestApp::logic(float delta) {
+    auto rot = iru::Quaternion::createRotation(iru::Vector3(0.f, 1.f, 0.f), an) *  iru::Quaternion::createRotation(iru::Vector3(1.f, 0.f, 0.f), -30);
+    auto frw = rot.toMatrix() * iru::Vector3(0.f, 0.f, 10.f);
+
+    an += 90.f * delta;
+    cam = iru::Matrix4::createLookAt(iru::Vector3(0.f, 0.f, 0.f) + frw, iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
+    res = per * cam;
+    shad1->setMatrix4("u_Mat", res);
     return true;
 }
 
 bool TestApp::render(float delta) {
+    glEnable(GL_DEPTH_TEST);
     glClearColor(1.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer().setShader(shad1);
     renderer().setTexture(tex1, 0);
     renderer().setRenderTarget(nullptr);
     renderer().setDescriptor(desc1);
-    renderer().draw(0, 3);
+    renderer().draw(0, mesh1.vertices.size());
     flip();
 }

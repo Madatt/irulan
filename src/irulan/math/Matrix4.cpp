@@ -62,6 +62,15 @@ namespace iru {
         return nw;
     }
 
+    Vector3f Matrix4::operator*(const Vector3f& vec) const {
+        Vector3f nw;
+        nw.x = vec.x * (*this)[0] + vec.y * (*this)[4] + vec.z * (*this)[8] + (*this)[12];
+        nw.y = vec.x * (*this)[1] + vec.y * (*this)[5] + vec.z * (*this)[9] + (*this)[13];
+        nw.z = vec.x * (*this)[2] + vec.y * (*this)[6] + vec.z * (*this)[10] + (*this)[14];
+
+        return nw;
+    }
+
     Matrix4& Matrix4::operator+=(const Matrix4& mat) {
         return (*this = *this + mat);
     }
@@ -72,10 +81,6 @@ namespace iru {
 
     Matrix4& Matrix4::operator*=(const Matrix4& mat) {
         return (*this = *this * mat);
-    }
-
-    Vector3f Matrix4::apply(const Vector3f& vec) const {
-        return iru::Vector3f();
     }
 
     Matrix4 Matrix4::getIdentity() {
