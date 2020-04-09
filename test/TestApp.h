@@ -11,7 +11,7 @@ class TestApp : public iru::App {
     iru::Buffer* buff1;
     iru::Descriptor* desc1;
     iru::Shader* shad1;
-    iru::Texture* tex1;
+    iru::Texture2D* tex1;
     iru::Mesh mesh1;
     iru::Matrix4 cam, per, res;
     float an = 0.f;

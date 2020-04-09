@@ -2,20 +2,15 @@
 #define IRULAN_TEXTURE_H
 
 #include "irulan/system/opengl/Pointer.h"
-#include "irulan/math/Vector2.h"
-#include <iostream>
 
 namespace iru {
     class Texture {
         friend class Renderer;
     public:
-        Texture();
+        virtual ~Texture() = 0;
 
-        void loadPng(const std::string& path);
-    private:
-        Vector2i size;
+    protected:
         ogl::Pointer<ogl::Texture> ptr;
     };
 }
-
 #endif //IRULAN_TEXTURE_H

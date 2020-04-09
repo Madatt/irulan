@@ -9,4 +9,4 @@
 #include "irulan/data/Mesh.h"
 #include "irulan/graph/Descriptor.h"
 #include "irulan/graph/Shader.h"
-#include "irulan/graph/Texture.h"
+#include "irulan/graph/Texture2D.h"

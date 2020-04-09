@@ -69,7 +69,7 @@ bool TestApp::init() {
     desc1->setAttributeBuffer(0, 0);
     desc1->setAttributeBuffer(1, 0);
 
-    tex1 = new iru::Texture();
+    tex1 = new iru::Texture2D();
     tex1->loadPng("rafonix.png");
 
 

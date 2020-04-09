@@ -4,7 +4,7 @@
 #include "RenderTarget.h"
 #include "Descriptor.h"
 #include "Shader.h"
-#include "Texture.h"
+#include "Texture2D.h"
 #include <cstddef>
 #include <array>
 
