@@ -21,6 +21,34 @@ namespace iru {
     }
 
     template<typename T>
+    Vector3<T>& Vector3<T>::operator*=(const T& val) {
+        return (*this = *this * val);
+    }
+
+    template<typename T>
+    Vector3<T>& Vector3<T>::operator/=(const T& val) {
+        return (*this = *this / val);
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::operator*(const T& val) const {
+        Vector3 res;
+        res.x = x * val;
+        res.y = y * val;
+        res.z = z * val;
+        return res;
+    }
+
+    template<typename T>
+    Vector3<T> Vector3<T>::operator/(const T& val) const {
+        Vector3 res;
+        res.x = x / val;
+        res.y = y / val;
+        res.z = z / val;
+        return res;
+    }
+
+    template<typename T>
     inline Vector3<T> &Vector3<T>::operator*=(const Vector3<T> &vec) {
         return (*this = *this * vec);
     }

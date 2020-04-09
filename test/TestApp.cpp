@@ -4,6 +4,7 @@
 bool TestApp::init() {
     buff1 = defaultAllocator().newBuffer(999);
     desc1 = new iru::Descriptor();
+    showCursor(false);
 
     float vers1[] = {
             0.0, 0.5,
@@ -54,9 +55,7 @@ bool TestApp::init() {
     mesh1.loadObj("test2.obj");
 
 
-    per = iru::Matrix4::createPerspective(45.f, 800.f/600.f, 0.1f, 100.0f);
-    cam = iru::Matrix4::createLookAt(iru::Vector3(10.f, 5.f, 10.f), iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
-    res = per * cam;
+    per = iru::Matrix4::createPerspective(45.f, 800.f / 600.f, 0.1f, 100.0f);
 
     shad1 = new iru::Shader(vers, frags);
     shad1->setInt("u_Tex", 0);
@@ -73,20 +72,35 @@ bool TestApp::init() {
     tex1->loadPng("rafonix.png");
 
 
-
     return true;
 }
 
 bool TestApp::logic(float delta) {
-    auto rot = iru::Quaternion::createRotation(iru::Vector3(0.f, 1.f, 0.f), an) *  iru::Quaternion::createRotation(iru::Vector3(1.f, 0.f, 0.f), -30);
-    auto frw = rot.toMatrix() * iru::Vector3(0.f, 0.f, 10.f);
+    auto mpos = getMousePosition() - (getWindowSize()/2);
 
-    if(getKeyState(SDL_SCANCODE_A))
-        an += 90.f * delta;
-    else if(getKeyState(SDL_SCANCODE_D))
-        an -= 90.f * delta;
+    horAn -= (float) mpos.x / (float) getWindowSize().x * 100.f;
+    verAn += (float) mpos.y / (float) getWindowSize().x * 100.f;
+    verAn = std::max(verAn, -88.f);
+    verAn = std::min(verAn, 88.f);
 
-    cam = iru::Matrix4::createLookAt(iru::Vector3(0.f, 0.f, 0.f) + frw, iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
+    auto rot = iru::Quaternion::createRotation(iru::Vector3(0.f, 1.f, 0.f), horAn) *
+               iru::Quaternion::createRotation(iru::Vector3(1.f, 0.f, 0.f), verAn);
+    auto frw = rot.toMatrix() * iru::Vector3(0.f, 0.f, 1.f);
+
+    setMousePosition(getWindowSize() / 2);
+
+    if (getKeyState(SDL_SCANCODE_W))
+        camPos += frw * 2 * delta;
+    else if (getKeyState(SDL_SCANCODE_S))
+        camPos -= frw * 2 * delta;
+
+    if (getKeyState(SDL_SCANCODE_A))
+        camPos -= frw.cross(iru::Vector3(0.f, 1.f, 0.f)).normalize() * 2 * delta;
+    else if (getKeyState(SDL_SCANCODE_D))
+        camPos += frw.cross(iru::Vector3(0.f, 1.f, 0.f)).normalize() * 2 * delta;
+
+    cam = iru::Matrix4::createLookAt(camPos, camPos + frw,
+                                     iru::Vector3(0.f, 1.f, 0.f));
     res = per * cam;
     shad1->setMatrix4("u_Mat", res);
     return true;

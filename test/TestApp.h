@@ -18,7 +18,9 @@ private:
     iru::Texture2D* tex1;
     iru::Mesh mesh1;
     iru::Matrix4 cam, per, res;
-    float an = 0.f;
+    iru::Vector3f camPos;
+    float verAn = 0.f;
+    float horAn = 0.f;
 };
 
 

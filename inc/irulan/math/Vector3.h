@@ -8,18 +8,23 @@ namespace iru {
         T x, y, z;
 
         Vector3() = default;
-        Vector3(T x, T y, T z): x(x), y(y), z(z){};
 
-        Vector3<T>& operator=(const Vector3<T> &vec);
-        Vector3<T> operator*(const Vector3<T> &vec) const;
-        Vector3<T>& operator*=(const Vector3<T> &vec);
-        Vector3<T> operator+(const Vector3<T> &vec) const;
-        Vector3<T>& operator+=(const Vector3<T> &vec);
-        Vector3<T> operator-(const Vector3<T> &vec) const;
-        Vector3<T>& operator-=(const Vector3<T> &vec);
+        Vector3(T x, T y, T z) : x(x), y(y), z(z) {};
+
+        Vector3<T>& operator=(const Vector3<T>& vec);
+        Vector3<T> operator*(const Vector3<T>& vec) const;
+        Vector3<T> operator*(const T& val) const;
+        Vector3<T> operator/(const T& val) const;
+        Vector3<T> operator+(const Vector3<T>& vec) const;
+        Vector3<T> operator-(const Vector3<T>& vec) const;
+        Vector3<T>& operator*=(const Vector3<T>& vec);
+        Vector3<T>& operator*=(const T& val);
+        Vector3<T>& operator/=(const T& val);
+        Vector3<T>& operator+=(const Vector3<T>& vec);
+        Vector3<T>& operator-=(const Vector3<T>& vec);
 
         Vector3<T> normalize() const;
-        Vector3<T> cross(const Vector3<T> &vec) const;
+        Vector3<T> cross(const Vector3<T>& vec) const;
     };
 
 

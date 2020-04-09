@@ -6,6 +6,7 @@ include_directories(inc)
 set(HEADERS
         inc/irulan/math/Matrix4.h
         inc/irulan/math/Vector2.h
+        inc/irulan/math/Vector3.h
         inc/irulan/data/Vertex.h
         inc/irulan/system/App.h
         inc/irulan/system/opengl/Pointer.h

@@ -34,33 +34,31 @@ namespace iru {
 
     int App::loop() {
         init();
-
+        accu = 0;
+        ticks = SDL_GetTicks();
         while (!done) {
             float ela = SDL_GetTicks() - ticks;
             ticks = SDL_GetTicks();
             accu += ela;
             while (accu >= 1000.f / 60.f) {
-                for(auto &k : keyStates) {
+                for (auto& k : keyStates) {
                     lastKeyStates[k.first] = k.second;
                 }
+
                 while (SDL_PollEvent(&event)) {
-                    if (event.type == SDL_QUIT)
+                    if (event.type == SDL_QUIT) {
                         close();
-
-                    if (event.type == SDL_KEYDOWN and !event.key.repeat) {
+                    } else if (event.type == SDL_KEYDOWN and !event.key.repeat) {
                         keyStates[event.key.keysym.scancode] = 1;
-                    }
-                    else if (event.type == SDL_KEYUP and !event.key.repeat) {
+                    } else if (event.type == SDL_KEYUP and !event.key.repeat) {
                         keyStates[event.key.keysym.scancode] = 0;
-                    }
-
-                    if(event.type == SDL_MOUSEMOTION) {
+                    } else if (event.type == SDL_MOUSEMOTION) {
                         mousePosition.x = event.motion.x;
                         mousePosition.y = event.motion.y;
+                        mouseMove.x = event.motion.xrel;
+                        mouseMove.y = event.motion.yrel;
                     }
-
                 }
-
 
                 logic(1.f / 60.f);
                 accu -= 1000.f / 60.f;
@@ -76,6 +74,10 @@ namespace iru {
         return mousePosition;
     }
 
+    Vector2i App::getMouseMove() {
+        return mouseMove;
+    }
+
     void App::setMousePosition(const Vector2i& pos) {
         SDL_WarpMouseInWindow(window, pos.x, pos.y);
     }
@@ -86,6 +88,17 @@ namespace iru {
 
     int App::getLastKeyState(Uint8 key) {
         return lastKeyStates[key];
+    }
+
+    Vector2i App::getWindowSize() {
+        return size;
+    }
+
+    void App::showCursor(bool show) {
+        if(show)
+            SDL_ShowCursor(SDL_ENABLE);
+        else
+            SDL_ShowCursor(SDL_DISABLE);
     }
 
     void App::flip() {

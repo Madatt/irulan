@@ -22,7 +22,10 @@ namespace iru {
         int getKeyState(Uint8 key);
         int getLastKeyState(Uint8 key);
         Vector2i getMousePosition();
+        Vector2i getMouseMove();
         void setMousePosition(const Vector2i& pos);
+        Vector2i getWindowSize();
+        void showCursor(bool show);
 
     private:
         Renderer rndr;
@@ -30,6 +33,7 @@ namespace iru {
         std::string title;
         Vector2i size;
         Vector2i mousePosition;
+        Vector2i mouseMove;
         bool done = false;
         float ticks, accu;
         SDL_Window* window;
