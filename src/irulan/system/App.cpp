@@ -39,15 +39,25 @@ namespace iru {
             float ela = SDL_GetTicks() - ticks;
             ticks = SDL_GetTicks();
             accu += ela;
-
-            SDL_Event event;
-            while (SDL_PollEvent(&event)) {
-                if (event.type == SDL_QUIT)
-                    close();
-
-            }
-
             while (accu >= 1000.f / 60.f) {
+                for(auto &k : keyStates) {
+                    lastKeyStates[k.first] = k.second;
+                }
+                SDL_Event event;
+                while (SDL_PollEvent(&event)) {
+                    if (event.type == SDL_QUIT)
+                        close();
+
+                    if (event.type == SDL_KEYDOWN and !event.key.repeat) {
+                        keyStates[event.key.keysym.scancode] = 1;
+                    }
+                    else if (event.type == SDL_KEYUP and !event.key.repeat) {
+                        keyStates[event.key.keysym.scancode] = 0;
+                    }
+
+                }
+
+
                 logic(1.f / 60.f);
                 accu -= 1000.f / 60.f;
             }
@@ -56,6 +66,14 @@ namespace iru {
         }
 
         return 0;
+    }
+
+    int App::getKeyState(Uint8 key) {
+        return keyStates[key];
+    }
+
+    int App::getLastKeyState(Uint8 key) {
+        return lastKeyStates[key];
     }
 
     void App::flip() {

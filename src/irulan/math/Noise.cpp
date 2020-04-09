@@ -79,4 +79,21 @@ namespace iru::Noise {
         return (lerp(lerp(n0, n1, uv.x), lerp(n2, n3, uv.x), uv.y) + 1.f) / 2.f;
 
     }
+
+    float perlin2fMulti(const Vector2f& pos, int octaves, float multi) {
+        float out = 0.0;
+        float frequency = 1.0;
+        float amplitude = 1.0;
+        float mx = 0.0;
+
+        for (int i = 0; i < octaves; i++) {
+            out += perlin2f(Vector2f(pos.x * frequency, pos.y * frequency)) * amplitude;
+            mx += amplitude;
+            amplitude *= multi;
+            frequency *= 2.0;
+        }
+
+        return out / mx;
+    }
+
 }

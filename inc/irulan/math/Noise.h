@@ -5,6 +5,7 @@
 
 namespace iru::Noise {
     float perlin2f(const Vector2f& pos);
+    float perlin2fMulti(const Vector2f& pos, int octaves, float multi);
 }
 
 

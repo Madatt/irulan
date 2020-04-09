@@ -6,6 +6,7 @@
 #include "BufferAllocator.h"
 #include "SDL2/SDL.h"
 #include <string>
+#include <unordered_map>
 
 namespace iru {
     class App {
@@ -18,6 +19,9 @@ namespace iru {
         void close() { done = true; };
         void flip();
 
+        int getKeyState(Uint8 key);
+        int getLastKeyState(Uint8 key);
+
     private:
         Renderer rndr;
         BufferAllocator allc;
@@ -27,6 +31,9 @@ namespace iru {
         float ticks, accu;
         SDL_Window* window;
         SDL_GLContext context;
+        std::unordered_map<Uint8, int> keyStates;
+        std::unordered_map<Uint8, int> lastKeyStates;
+
 
         void constructWindow();
         int loop();
