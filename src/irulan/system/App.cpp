@@ -54,6 +54,11 @@ namespace iru {
                         keyStates[event.key.keysym.scancode] = 0;
                     }
 
+                    if(event.type == SDL_MOUSEMOTION) {
+                        mousePosition.x = event.motion.x;
+                        mousePosition.y = event.motion.y;
+                    }
+
                 }
 
 
@@ -65,6 +70,14 @@ namespace iru {
         }
 
         return 0;
+    }
+
+    Vector2i App::getMousePosition() {
+        return mousePosition;
+    }
+
+    void App::setMousePosition(const Vector2i& pos) {
+        SDL_WarpMouseInWindow(window, pos.x, pos.y);
     }
 
     int App::getKeyState(Uint8 key) {

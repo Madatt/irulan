@@ -21,12 +21,15 @@ namespace iru {
 
         int getKeyState(Uint8 key);
         int getLastKeyState(Uint8 key);
+        Vector2i getMousePosition();
+        void setMousePosition(const Vector2i& pos);
 
     private:
         Renderer rndr;
         BufferAllocator allc;
         std::string title;
         Vector2i size;
+        Vector2i mousePosition;
         bool done = false;
         float ticks, accu;
         SDL_Window* window;
