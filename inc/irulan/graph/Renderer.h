@@ -1,7 +1,7 @@
 #ifndef IRULAN_RENDERER_H
 #define IRULAN_RENDERER_H
 
-#include "RenderTarget.h"
+#include "Framebuffer.h"
 #include "Descriptor.h"
 #include "Shader.h"
 #include "Texture2D.h"
@@ -13,7 +13,7 @@ namespace iru {
         friend class App;
 
         struct RendererState {
-            RenderTarget* target = nullptr;
+            Framebuffer* target = nullptr;
             Descriptor* descriptor = nullptr;
             Shader* shader = nullptr;
             std::array<Texture*, 16> textures = {};
@@ -22,7 +22,7 @@ namespace iru {
         void draw(int first, int count);
 
         void setDescriptor(Descriptor* descriptor);
-        void setRenderTarget(RenderTarget* target);
+        void setFramebuffer(Framebuffer* target);
         void setShader(Shader* shader);
         void setTexture(Texture* texture, int unit);
 
@@ -31,7 +31,7 @@ namespace iru {
         void* operator new(std::size_t sz) = delete;
 
         void bindDescriptor();
-        void bindTarget();
+        void bindFramebuffer();
         void bindShader();
         void bindTextures();
 

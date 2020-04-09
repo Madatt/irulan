@@ -112,7 +112,7 @@ bool TestApp::render(float delta) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer().setShader(shad1);
     renderer().setTexture(tex1, 0);
-    renderer().setRenderTarget(nullptr);
+    renderer().setFramebuffer(nullptr);
     renderer().setDescriptor(desc1);
     renderer().draw(0, mesh1.vertices.size());
     flip();

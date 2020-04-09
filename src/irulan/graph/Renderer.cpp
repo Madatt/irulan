@@ -17,7 +17,7 @@ namespace iru {
         nextState.descriptor = descriptor;
     }
 
-    void Renderer::setRenderTarget(RenderTarget* target) {
+    void Renderer::setFramebuffer(Framebuffer* target) {
         nextState.target = target;
     }
 
@@ -58,7 +58,7 @@ namespace iru {
     }
 
 
-    void Renderer::bindTarget() {
+    void Renderer::bindFramebuffer() {
         if (nextState.target != lastState.target) {
             if (nextState.target == nullptr)
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);

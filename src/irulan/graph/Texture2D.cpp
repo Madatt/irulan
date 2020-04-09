@@ -19,4 +19,9 @@ namespace iru {
         glTextureStorage2D(ptr.get(), 1, GL_RGBA8, size.x, size.y);
         glTextureSubImage2D(ptr.get(), 0, 0, 0, size.x, size.y, GL_RGBA, GL_UNSIGNED_BYTE, img);
     }
+
+    void Texture2D::createDepth(const Vector2i& size) {
+        this->size = size;
+        glTextureStorage2D(ptr.get(), 1, GL_DEPTH_COMPONENT24, size.x, size.y);
+    }
 }

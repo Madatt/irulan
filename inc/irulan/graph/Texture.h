@@ -6,6 +6,7 @@
 namespace iru {
     class Texture {
         friend class Renderer;
+        friend class Framebuffer;
     public:
         virtual ~Texture() = 0;
 

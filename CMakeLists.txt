@@ -24,7 +24,7 @@ set(SOURCES
         src/irulan/math/Noise.cpp
         src/irulan/data/Mesh.cpp
         src/irulan/graph/Renderer.cpp
-        src/irulan/graph/RenderTarget.cpp
+        src/irulan/graph/Framebuffer.cpp
         src/irulan/graph/Descriptor.cpp
         src/irulan/graph/Shader.cpp
         src/irulan/graph/Texture.cpp
