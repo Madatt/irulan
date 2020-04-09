@@ -2,6 +2,7 @@
 #define IRULAN_POINTER_H
 
 #include "Traits.h"
+#include "irulan/system/Log.h"
 
 namespace iru::ogl {
     template<typename T>

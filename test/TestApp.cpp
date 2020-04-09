@@ -103,3 +103,11 @@ bool TestApp::render(float delta) {
     renderer().draw(0, mesh1.vertices.size());
     flip();
 }
+
+TestApp::~TestApp() {
+    delete buff1;
+    delete desc1;
+    delete shad1;
+    delete tex1;
+
+}

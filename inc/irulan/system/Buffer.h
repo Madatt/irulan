@@ -11,6 +11,8 @@ namespace iru {
         friend class Descriptor;
 
     public:
+        ~Buffer();
+
         void setData(unsigned int size, unsigned int off, void* data);
 
         template<typename T>
@@ -23,7 +25,6 @@ namespace iru {
     private:
         BufferBlock* block;
         Buffer() = delete;
-        ~Buffer();
         Buffer(BufferBlock* block);
 
     };

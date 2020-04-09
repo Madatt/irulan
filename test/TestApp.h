@@ -4,6 +4,10 @@
 #include "irulan/irulan.h"
 
 class TestApp : public iru::App {
+public:
+    ~TestApp();
+
+private:
     bool init() override;
     bool logic(float delta) override;
     bool render(float delta) override;

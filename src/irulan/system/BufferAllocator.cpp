@@ -2,6 +2,7 @@
 #include <iostream>
 #include "irulan/system/BufferAllocator.h"
 #include "glad/glad.h"
+#include "irulan/system/Log.h"
 
 namespace iru {
     BufferAllocator::BufferAllocator() {
@@ -18,7 +19,7 @@ namespace iru {
                 curr->free = false;
                 curr->size = size;
 
-                std::cout << "Allocated new buffer: " << size << ", vb = " << curr->id << std::endl;
+                defaultLog << "[BufferAllocator] Allocated new buffer: " << size << ", vb = " << curr->id << "\n";
 
                 if (ns > 0) {
                     auto nb = new BufferBlock;
@@ -40,9 +41,12 @@ namespace iru {
     }
 
     void BufferAllocator::free(BufferBlock* buffer) {
-        if (buffer->ba == this)
+        if (buffer->ba == this) {
+            defaultLog << "[BufferAllocator] Freed block: " << buffer->size << ", vb = " << buffer->id << "\n";
             buffer->free = true;
+        }
     }
+
 
     Buffer* BufferAllocator::newBuffer(unsigned int size) {
         auto block = alloc(size);
@@ -58,7 +62,7 @@ namespace iru {
         nw->ptr = glMapNamedBufferRange(nw->id, 0, size,
                                         GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
 
-        std::cout << "Allocated new block: " << size << ", vb = " << nw->id << std::endl;
+        defaultLog << "[BufferAllocator] Allocated new block: " << size << ", vb = " << nw->id << "\n";
 
         if (head == nullptr)
             head = nw;

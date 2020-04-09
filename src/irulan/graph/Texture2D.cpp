@@ -1,4 +1,5 @@
 #include "irulan/graph/Texture2D.h"
+#include "irulan/system/Log.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -10,6 +11,7 @@ namespace iru {
     }
 
     void Texture2D::loadPng(const std::string& path) {
+        defaultLog << "[Texture2D] Loading texture from file: " << path << "\n";
         int channels;
         stbi_set_flip_vertically_on_load(true);
         auto* img = stbi_load(path.c_str(), &size.x, &size.y, &channels, STBI_rgb_alpha);

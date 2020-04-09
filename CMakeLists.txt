@@ -17,6 +17,7 @@ set(SOURCES
         src/irulan/system/opengl/Traits.cpp
         src/irulan/system/BufferAllocator.cpp
         src/irulan/system/Buffer.cpp
+        src/irulan/system/Log.cpp
         src/irulan/math/Matrix4.cpp
         src/irulan/math/Quaternion.cpp
         src/irulan/math/Noise.cpp
