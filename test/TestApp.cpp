@@ -81,7 +81,11 @@ bool TestApp::logic(float delta) {
     auto rot = iru::Quaternion::createRotation(iru::Vector3(0.f, 1.f, 0.f), an) *  iru::Quaternion::createRotation(iru::Vector3(1.f, 0.f, 0.f), -30);
     auto frw = rot.toMatrix() * iru::Vector3(0.f, 0.f, 10.f);
 
-    an += 90.f * delta;
+    if(getKeyState(SDL_SCANCODE_A))
+        an += 90.f * delta;
+    else if(getKeyState(SDL_SCANCODE_D))
+        an -= 90.f * delta;
+
     cam = iru::Matrix4::createLookAt(iru::Vector3(0.f, 0.f, 0.f) + frw, iru::Vector3(0.f, 0.f, 0.f), iru::Vector3(0.f, 1.f, 0.f));
     res = per * cam;
     shad1->setMatrix4("u_Mat", res);

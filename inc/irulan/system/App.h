@@ -31,6 +31,7 @@ namespace iru {
         float ticks, accu;
         SDL_Window* window;
         SDL_GLContext context;
+        SDL_Event event;
         std::unordered_map<Uint8, int> keyStates;
         std::unordered_map<Uint8, int> lastKeyStates;
 

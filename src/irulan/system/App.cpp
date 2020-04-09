@@ -43,7 +43,6 @@ namespace iru {
                 for(auto &k : keyStates) {
                     lastKeyStates[k.first] = k.second;
                 }
-                SDL_Event event;
                 while (SDL_PollEvent(&event)) {
                     if (event.type == SDL_QUIT)
                         close();
