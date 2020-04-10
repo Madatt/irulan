@@ -2,9 +2,10 @@
 #define IRULAN_TEXTURE_H
 
 #include "irulan/system/opengl/Pointer.h"
+#include "irulan/system/Resource.h"
 
 namespace iru {
-    class Texture {
+    class Texture : public Resource {
         friend class Renderer;
         friend class Framebuffer;
     public:

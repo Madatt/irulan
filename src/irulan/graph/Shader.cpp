@@ -1,11 +1,26 @@
 #include "irulan/graph/Shader.h"
 #include "glad/glad.h"
 #include <iostream>
+#include <fstream>
 
 namespace iru {
     Shader::Shader(const std::string& ver, const std::string& frag) {
         setVertex(ver);
         setFragment(frag);
+        link();
+    }
+
+    void Shader::loadFromFiles(const std::string& pathVer, const std::string& pathFrag) {
+        std::ifstream ver(pathVer);
+        std::string verStr((std::istreambuf_iterator<char>(ver)),
+                           std::istreambuf_iterator<char>());
+
+        std::ifstream frag(pathVer);
+        std::string fragStr((std::istreambuf_iterator<char>(frag)),
+                            std::istreambuf_iterator<char>());
+
+        setVertex(verStr);
+        setFragment(fragStr);
         link();
     }
 
@@ -15,9 +30,21 @@ namespace iru {
                                       mat.data);
     }
 
+    void Shader::setFloat(const std::string& name, float val) const {
+        if (ptr.get())
+            glProgramUniform1f(ptr.get(), glGetUniformLocation(ptr.get(), name.c_str()), val);
+    }
+
     void Shader::setInt(const std::string& name, int val) const {
         if (ptr.get())
             glProgramUniform1i(ptr.get(), glGetUniformLocation(ptr.get(), name.c_str()), val);
+    }
+
+    void Shader::setVector3f(const std::string& name, const Vector3f& vec) const {
+        float data[3] = {vec.x, vec.y, vec.z};
+
+        if (ptr.get())
+            glProgramUniform3fv(ptr.get(), glGetUniformLocation(ptr.get(), name.c_str()), 1, data);
     }
 
     bool Shader::check() {
@@ -38,9 +65,11 @@ namespace iru {
         glGetShaderiv(vId, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(vId, 512, NULL, msg);
-            std::cout << "[Error] Vertex compilation failed: " << msg << std::endl;
+            defaultLog << "[Shader] Vertex compilation failed: " << msg << "\n";
             vId = 0;
+            return;
         }
+        defaultLog << "[Shader] Vertex compilation done" << "\n";
     }
 
     void Shader::setFragment(const std::string& frag) {
@@ -57,9 +86,11 @@ namespace iru {
         glGetShaderiv(fId, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(fId, 512, NULL, msg);
-            std::cout << "[Error] Fragment compilation failed: " << msg << std::endl;
+            defaultLog << "[Shader] Fragment compilation failed: " << msg << "\n";
             fId = 0;
+            return;
         }
+        defaultLog << "[Shader] Fragment compilation done" << "\n";
     }
 
     void Shader::link() {
@@ -76,9 +107,10 @@ namespace iru {
         glGetProgramiv(ptr.get(), GL_LINK_STATUS, &succ);
         if (!succ) {
             glGetProgramInfoLog(ptr.get(), 512, NULL, msg);
-            std::cout << "[Error] Shader linking failed: " << msg << std::endl;
+            defaultLog << "[Shader] Shader linking failed: " << msg << "\n";
+            return;
         }
-
+        defaultLog << "[Shader] Shader linking done" << "\n";
         glDeleteShader(fId);
         glDeleteShader(vId);
     }

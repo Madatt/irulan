@@ -52,6 +52,8 @@ bool TestApp::init() {
                         "    FragColor = vec4(1, 1, 1, 1) * texture(u_Tex, o_Tex);\n"
                         "} ";
 
+    defaultRM().add<iru::Mesh>("testMesh");
+    defaultRM().get<iru::Mesh>("testMesh")->loadObj("test.obj");
     mesh1.loadObj("test.obj");
 
 
@@ -61,7 +63,7 @@ bool TestApp::init() {
     shad1->setInt("u_Tex", 0);
     shad1->setMatrix4("u_Mat", res);
 
-    buff1->setData(0, mesh1.vertices);
+    buff1->setData(0, defaultRM().get<iru::Mesh>("testMesh")->vertices);
     desc1->attachBuffer(buff1, 0, 0, sizeof(iru::Vertex));
     desc1->setAttribute(0, 3, 0);
     desc1->setAttribute(1, 2, sizeof(iru::Vector3f));
@@ -117,6 +119,7 @@ bool TestApp::logic(float delta) {
 }
 
 bool TestApp::render(float delta) {
+    glEnable(GL_DEPTH_TEST);
     renderer().setFramebuffer(fbo1);
     glViewport(0, 0, getWindowSize().x, getWindowSize().y);
     renderer().clearAll(fbo1);
@@ -125,6 +128,7 @@ bool TestApp::render(float delta) {
     renderer().setDescriptor(desc1);
     renderer().draw(0, mesh1.vertices.size());
 
+    glEnable(GL_DEPTH_TEST);
     renderer().setFramebuffer(nullptr);
     glViewport(0, 0, getWindowSize().x, getWindowSize().y);
     renderer().clearAll(nullptr);

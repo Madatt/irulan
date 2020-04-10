@@ -11,6 +11,8 @@ set(HEADERS
         inc/irulan/system/App.h
         inc/irulan/system/opengl/Pointer.h
         inc/irulan/system/opengl/Pointer.tpp
+        inc/irulan/system/ResourceManager.h
+        inc/irulan/system/ResourceManager.tpp
         )
 
 set(SOURCES
@@ -20,6 +22,7 @@ set(SOURCES
         src/irulan/system/BufferAllocator.cpp
         src/irulan/system/Buffer.cpp
         src/irulan/system/Log.cpp
+        src/irulan/system/Resource.cpp
         src/irulan/math/Matrix4.cpp
         src/irulan/math/Quaternion.cpp
         src/irulan/math/Noise.cpp
@@ -35,5 +38,6 @@ set(SOURCES
 
 
 add_library(irulan ${SOURCES} ${HEADERS})
+target_compile_options(irulan PUBLIC -fno-exceptions)
 set_target_properties(irulan PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
 add_subdirectory(test)

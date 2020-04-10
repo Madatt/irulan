@@ -4,6 +4,7 @@
 #include "irulan/math/Vector2.h"
 #include "irulan/graph/Renderer.h"
 #include "BufferAllocator.h"
+#include "ResourceManager.h"
 #include "SDL2/SDL.h"
 #include <string>
 #include <unordered_map>
@@ -16,6 +17,7 @@ namespace iru {
     protected:
         Renderer& renderer() { return rndr; };
         BufferAllocator& defaultAllocator() { return allc; };
+        ResourceManager& defaultRM() { return rm; };
         void close() { done = true; };
         void flip();
 
@@ -30,6 +32,7 @@ namespace iru {
     private:
         Renderer rndr;
         BufferAllocator allc;
+        ResourceManager rm;
         std::string title;
         Vector2i size;
         Vector2i mousePosition;
