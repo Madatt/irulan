@@ -12,6 +12,7 @@ namespace iru {
         Texture2D();
 
         void createDepth(const Vector2i& size);
+        void createEmpty(const Vector2i& size);
         void loadPng(const std::string& path);
     private:
         Vector2i size;

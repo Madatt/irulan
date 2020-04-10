@@ -16,9 +16,12 @@ private:
     iru::Descriptor* desc1;
     iru::Shader* shad1;
     iru::Texture2D* tex1;
+    iru::Texture2D* tex2;
+    iru::Texture2D* tex3;
     iru::Mesh mesh1;
     iru::Matrix4 cam, per, res;
     iru::Vector3f camPos;
+    iru::Framebuffer* fbo1;
     float verAn = 0.f;
     float horAn = 0.f;
 };

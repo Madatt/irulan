@@ -16,6 +16,7 @@ set(HEADERS
 set(SOURCES
         src/irulan/system/App.cpp
         src/irulan/system/opengl/Traits.cpp
+        src/irulan/system/opengl/Debug.cpp
         src/irulan/system/BufferAllocator.cpp
         src/irulan/system/Buffer.cpp
         src/irulan/system/Log.cpp

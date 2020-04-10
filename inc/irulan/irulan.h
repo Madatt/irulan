@@ -10,3 +10,4 @@
 #include "irulan/graph/Descriptor.h"
 #include "irulan/graph/Shader.h"
 #include "irulan/graph/Texture2D.h"
+#include "irulan/graph/Framebuffer.h"

@@ -20,6 +20,7 @@ namespace iru {
         };
     public:
         void draw(int first, int count);
+        void clearAll(Framebuffer* fb = nullptr, unsigned int layer = 0);
 
         void setDescriptor(Descriptor* descriptor);
         void setFramebuffer(Framebuffer* target);

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "irulan/system/App.h"
+#include "irulan/system/opengl/Debug.h"
 #include "glad/glad.h"
 
 namespace iru {
@@ -12,6 +13,13 @@ namespace iru {
             close();
             return 0;
         }
+
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(ogl::openglCallbackFunction, nullptr);
+        glDebugMessageControl(
+                GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true
+        );
 
         glEnable(GL_DEBUG_OUTPUT);
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);

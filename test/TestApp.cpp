@@ -45,14 +45,14 @@ bool TestApp::init() {
 
     std::string frags = "#version 450 core\n"
                         "in vec2 o_Tex;\n"
-                        "out vec4 FragColor;\n"
+                        "layout(location = 0) out vec4 FragColor;\n"
                         "uniform sampler2D u_Tex;\n"
                         "void main()\n"
                         "{\n"
                         "    FragColor = vec4(1, 1, 1, 1) * texture(u_Tex, o_Tex);\n"
                         "} ";
 
-    mesh1.loadObj("test2.obj");
+    mesh1.loadObj("test.obj");
 
 
     per = iru::Matrix4::createPerspective(45.f, 800.f / 600.f, 0.1f, 100.0f);
@@ -71,6 +71,16 @@ bool TestApp::init() {
     tex1 = new iru::Texture2D();
     tex1->loadPng("rafonix.png");
 
+    tex2 = new iru::Texture2D();
+    tex2->createEmpty(iru::Vector2i(800, 600));
+
+    tex3 = new iru::Texture2D();
+    tex3->createDepth(iru::Vector2i(800, 600));
+
+    fbo1 = new iru::Framebuffer();
+    fbo1->bindColorTexture(tex2, 0);
+    fbo1->bindDepthTexture(tex3);
+    fbo1->attach({0});
 
     return true;
 }
@@ -107,14 +117,22 @@ bool TestApp::logic(float delta) {
 }
 
 bool TestApp::render(float delta) {
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(1.0, 0.0, 0.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer().setFramebuffer(fbo1);
+    glViewport(0, 0, getWindowSize().x, getWindowSize().y);
+    renderer().clearAll(fbo1);
     renderer().setShader(shad1);
     renderer().setTexture(tex1, 0);
-    renderer().setFramebuffer(nullptr);
     renderer().setDescriptor(desc1);
     renderer().draw(0, mesh1.vertices.size());
+
+    renderer().setFramebuffer(nullptr);
+    glViewport(0, 0, getWindowSize().x, getWindowSize().y);
+    renderer().clearAll(nullptr);
+    renderer().setShader(shad1);
+    renderer().setTexture(tex2, 0);
+    renderer().setDescriptor(desc1);
+    renderer().draw(0, mesh1.vertices.size());
+
     flip();
 }
 
@@ -123,5 +141,6 @@ TestApp::~TestApp() {
     delete desc1;
     delete shad1;
     delete tex1;
-
+    delete tex2;
+    delete fbo1;
 }
