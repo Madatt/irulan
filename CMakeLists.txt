@@ -35,4 +35,5 @@ set(SOURCES
 
 
 add_library(irulan ${SOURCES} ${HEADERS})
+set_target_properties(irulan PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
 add_subdirectory(test)
