@@ -7,6 +7,7 @@
 #include "irulan/system/ResourceManager.h"
 #include "irulan/math/Vector2.h"
 #include "irulan/math/Matrix4.h"
+#include "irulan/math/Quaternion.h"
 #include "irulan/data/Vertex.h"
 #include "irulan/data/Mesh.h"
 #include "irulan/graph/Descriptor.h"

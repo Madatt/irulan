@@ -14,7 +14,6 @@ namespace iru {
     public:
         int construct(Vector2i size, const std::string& title);
 
-    protected:
         Renderer& renderer() { return rndr; };
         BufferAllocator& defaultAllocator() { return allc; };
         ResourceManager& defaultRM() { return rm; };

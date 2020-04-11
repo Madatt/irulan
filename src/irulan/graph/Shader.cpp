@@ -15,7 +15,7 @@ namespace iru {
         std::string verStr((std::istreambuf_iterator<char>(ver)),
                            std::istreambuf_iterator<char>());
 
-        std::ifstream frag(pathVer);
+        std::ifstream frag(pathFrag);
         std::string fragStr((std::istreambuf_iterator<char>(frag)),
                             std::istreambuf_iterator<char>());
 
