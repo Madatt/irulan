@@ -3,9 +3,10 @@
 
 #include "irulan/system/Buffer.h"
 #include "irulan/system/opengl/Pointer.h"
+#include "irulan/system/Resource.h"
 
 namespace iru {
-    class Descriptor {
+    class Descriptor : public Resource {
         friend class Renderer;
     public:
         Descriptor();

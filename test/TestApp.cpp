@@ -53,8 +53,8 @@ bool TestApp::init() {
                         "} ";
 
     defaultRM().add<iru::Mesh>("testMesh");
-    defaultRM().get<iru::Mesh>("testMesh")->loadObj("test.obj");
-    mesh1.loadObj("test.obj");
+    defaultRM().get<iru::Mesh>("testMesh")->loadObj("test2.obj");
+    mesh1.loadObj("test2.obj");
 
 
     per = iru::Matrix4::createPerspective(45.f, 800.f / 600.f, 0.1f, 100.0f);
@@ -133,7 +133,7 @@ bool TestApp::render(float delta) {
     glViewport(0, 0, getWindowSize().x, getWindowSize().y);
     renderer().clearAll(nullptr);
     renderer().setShader(shad1);
-    renderer().setTexture(tex2, 0);
+    renderer().setTexture(tex1, 0);
     renderer().setDescriptor(desc1);
     renderer().draw(0, mesh1.vertices.size());
 
