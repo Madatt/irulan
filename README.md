@@ -1,4 +1,10 @@
 # irulan
 
 OpenGL framework.
-Currently being rewritten...
+
+## Third Parties
+  * glad
+  * SDL2
+
+## Building
+  * Windows - use MSYS2
