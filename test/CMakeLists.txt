@@ -5,7 +5,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build)
 
 include_directories(../inc)
 include_directories(${PROJECT_SOURCE_DIR})
-link_directories(../lib)
 
 add_executable(irulan_test main.cpp TestApp.cpp)
 set_target_properties(irulan PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../build)
