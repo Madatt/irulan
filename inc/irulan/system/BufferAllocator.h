@@ -2,7 +2,7 @@
 #define IRULAN_BUFFERALLOCATOR_H
 
 namespace iru {
-    const unsigned int POOL_SIZE = sizeof(float) * 3 * 10000;
+    const unsigned int POOL_SIZE = sizeof(float) * 3 * 60000;
 
     class BufferAllocator;
     class Buffer;
