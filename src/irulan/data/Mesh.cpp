@@ -56,6 +56,6 @@ namespace iru {
             }
         }
 
-        defaultLog() << "[Mesh] Loaded model: " << vertices.size()/3 << "tris \n";
+        defaultLog() << "[Mesh] Loaded model: " << vertices.size()/3 << " tris\n";
     }
 }
