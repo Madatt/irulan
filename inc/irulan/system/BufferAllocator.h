@@ -27,12 +27,13 @@ namespace iru {
     class BufferAllocator {
         friend class Buffer;
     public:
-        BufferAllocator();
+        BufferAllocator(unsigned int pool = POOL_SIZE);
         ~BufferAllocator();
 
         Buffer* newBuffer(unsigned int size);
 
     private:
+        const unsigned int pool;
         BufferBlock* head = nullptr;
 
         BufferBlock* alloc(unsigned int size);

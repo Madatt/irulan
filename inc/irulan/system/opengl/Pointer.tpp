@@ -5,7 +5,7 @@ namespace iru::ogl {
     Pointer<T>::Pointer() {
         rc = new RefCounter();
         id = T::alloc();
-        defaultLog << "[ogl::Pointer] Allocated new OpenGl object" << "\n";
+        defaultLog() << "[ogl::Pointer] Allocated new OpenGl object" << "\n";
     }
 
     template<typename T>
@@ -21,7 +21,7 @@ namespace iru::ogl {
         if (rc->get() <= 0) {
             delete rc;
             T::free(id);
-            defaultLog << "[ogl::Pointer] Freed OpenGl object" << "\n";
+            defaultLog() << "[ogl::Pointer] Freed OpenGl object" << "\n";
         }
     }
 
@@ -31,7 +31,7 @@ namespace iru::ogl {
         if (rc->get() <= 0) {
             delete rc;
             T::free(id);
-            defaultLog << "[ogl::Pointer] Freed OpenGl object" << "\n";
+            defaultLog() << "[ogl::Pointer] Freed OpenGl object" << "\n";
 
         }
 

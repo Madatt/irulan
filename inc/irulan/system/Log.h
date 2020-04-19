@@ -7,13 +7,10 @@
 namespace iru {
     class Log {
     public:
-        Log(std::ostream& stream): stream(&stream){};
+        Log(std::ostream& stream) : stream(&stream) {};
         ~Log();
 
-        Log& operator<<(const std::string& string);
-        Log& operator<<(const int& val);
-        Log& operator<<(const unsigned int& val);
-        Log& operator<<(const float& val);
+        std::ostream& operator()(){return *stream;};
 
     private:
         std::ostream* stream;

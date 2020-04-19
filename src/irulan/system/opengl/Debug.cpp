@@ -44,7 +44,7 @@ namespace iru::ogl {
         (void) t_length;
         (void) t_userParam;
         //fprintf(stderr, "%s\n", t_message);
-        defaultLog << "[OpenGl] " << t_message << "\n";
+        defaultLog() << "[OpenGl] " << t_message << "\n";
         if (t_severity == GL_DEBUG_SEVERITY_HIGH) {
            // fprintf(stderr, "Aborting...\n");
             //abort();

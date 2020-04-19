@@ -8,24 +8,4 @@ namespace iru {
         stream->flush();
     }
 
-    Log& Log::operator<<(const std::string& string) {
-        *stream << string;
-        return *this;
-    }
-
-    Log& Log::operator<<(const int& val) {
-        *stream << val;
-        return *this;
-    }
-
-    Log& Log::operator<<(const float& val) {
-        *stream << val;
-        return *this;
-    }
-
-    Log& Log::operator<<(const unsigned int& val) {
-        *stream << val;
-        return *this;
-    }
-
 }

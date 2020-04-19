@@ -5,7 +5,8 @@
 #include "irulan/system/Log.h"
 
 namespace iru {
-    BufferAllocator::BufferAllocator() {
+    BufferAllocator::BufferAllocator(unsigned int pool)
+            : pool(pool) {
     }
 
     BufferAllocator::~BufferAllocator() {
@@ -19,7 +20,7 @@ namespace iru {
                 curr->free = false;
                 curr->size = size;
 
-                defaultLog << "[BufferAllocator] Allocated new buffer: " << size << ", vb = " << curr->id << "\n";
+                defaultLog() << "[BufferAllocator] Allocated new buffer: " << size << ", vb = " << curr->id << "\n";
 
                 if (ns > 0) {
                     auto nb = new BufferBlock;
@@ -36,13 +37,13 @@ namespace iru {
             }
         }
 
-        newBlock(size > POOL_SIZE ? size : POOL_SIZE);
+        newBlock(size > pool ? size : pool);
         return alloc(size);
     }
 
     void BufferAllocator::free(BufferBlock* buffer) {
         if (buffer->ba == this) {
-            defaultLog << "[BufferAllocator] Freed block: " << buffer->size << ", vb = " << buffer->id << "\n";
+            defaultLog() << "[BufferAllocator] Freed block: " << buffer->size << ", vb = " << buffer->id << "\n";
             buffer->free = true;
         }
     }
@@ -62,7 +63,7 @@ namespace iru {
         nw->ptr = glMapNamedBufferRange(nw->id, 0, size,
                                         GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
 
-        defaultLog << "[BufferAllocator] Allocated new block: " << size << ", vb = " << nw->id << "\n";
+        defaultLog() << "[BufferAllocator] Allocated new block: " << size << ", vb = " << nw->id << "\n";
 
         if (head == nullptr)
             head = nw;

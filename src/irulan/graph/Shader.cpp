@@ -65,11 +65,11 @@ namespace iru {
         glGetShaderiv(vId, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(vId, 512, NULL, msg);
-            defaultLog << "[Shader] Vertex compilation failed: " << msg << "\n";
+            defaultLog() << "[Shader] Vertex compilation failed: " << msg << "\n";
             vId = 0;
             return;
         }
-        defaultLog << "[Shader] Vertex compilation done" << "\n";
+        defaultLog() << "[Shader] Vertex compilation done" << "\n";
     }
 
     void Shader::setFragment(const std::string& frag) {
@@ -86,11 +86,11 @@ namespace iru {
         glGetShaderiv(fId, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(fId, 512, NULL, msg);
-            defaultLog << "[Shader] Fragment compilation failed: " << msg << "\n";
+            defaultLog() << "[Shader] Fragment compilation failed: " << msg << "\n";
             fId = 0;
             return;
         }
-        defaultLog << "[Shader] Fragment compilation done" << "\n";
+        defaultLog() << "[Shader] Fragment compilation done" << "\n";
     }
 
     void Shader::link() {
@@ -107,10 +107,10 @@ namespace iru {
         glGetProgramiv(ptr.get(), GL_LINK_STATUS, &succ);
         if (!succ) {
             glGetProgramInfoLog(ptr.get(), 512, NULL, msg);
-            defaultLog << "[Shader] Shader linking failed: " << msg << "\n";
+            defaultLog() << "[Shader] Shader linking failed: " << msg << "\n";
             return;
         }
-        defaultLog << "[Shader] Shader linking done" << "\n";
+        defaultLog() << "[Shader] Shader linking done" << "\n";
         glDeleteShader(fId);
         glDeleteShader(vId);
     }

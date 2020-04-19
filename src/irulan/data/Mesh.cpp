@@ -1,4 +1,5 @@
 #include "irulan/data/Mesh.h"
+#include "irulan/system/Log.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -24,6 +25,8 @@ namespace iru {
         std::vector<Vector3f> pos;
         std::vector<Vector2f> posTex;
         std::vector<Vector3f> norm;
+
+        defaultLog() << "[Mesh] Loading model from file: " << path << "\n";
 
         std::ifstream file(path);
         std::string line, c, f;
@@ -52,5 +55,7 @@ namespace iru {
                 }
             }
         }
+
+        defaultLog() << "[Mesh] Loaded model: " << vertices.size()/3 << "tris \n";
     }
 }
