@@ -1,6 +1,7 @@
 # irulan
 
-OpenGL framework.
+Framework I wrote during OpenGL study. Don't use, better version in progress.
+
 
 ## Third Parties
   * glad
